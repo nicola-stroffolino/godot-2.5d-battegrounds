@@ -4,19 +4,39 @@ using System;
 public partial class Player : CharacterBody3D {
 	public AnimatedSprite3D Sprite { get; set; }
 	public Vector2 SpriteDirection { get; set; } // should NEVER be equal to Vector2.Zero
+	// [Export] public ShaderMaterial ShadowShader { get; set; }
 
 	public const float Speed = 5.0f;
+	public const float JumpVelocity = 4.5f;
+	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
+
 
     public override void _Ready() {
 		Sprite = GetNode<AnimatedSprite3D>("%Sprite");
 		SpriteDirection = Vector2.Down;
+		// Sprite.Billboard = BaseMaterial3D.BillboardModeEnum.Enabled;
 	}
 
     public override void _Process(double delta) {
-        
+		// ShadowShader.SetShaderParameter("player_position", GlobalPosition);
     }
 
     public override void _PhysicsProcess(double delta) {
+		if (!IsOnFloor())
+			Velocity = new() {
+				X = Velocity.X,
+				Y = Velocity.Y - gravity * (float)delta,
+				Z = Velocity.Z
+			};
+			 
+		// Handle Jump.
+		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
+			Velocity = new() {
+				X = Velocity.X,
+				Y = JumpVelocity,
+				Z = Velocity.Z
+			};
+
 		MoveAndSlide();
 	}
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cdd8830hlpc3v"]
+[gd_scene load_steps=15 format=3 uid="uid://cdd8830hlpc3v"]
 
 [ext_resource type="Script" path="res://scripts/CameraController.cs" id="1_bfpcc"]
 [ext_resource type="Script" path="res://scripts/Player.cs" id="1_mpj20"]
 [ext_resource type="Texture2D" uid="uid://coed84aakba26" path="res://assets/seamless-360-degrees-angle-view-blue-sky-with-clouds-with-zenith-in-equirectangular-projection-upper-half-of-the-sphere-free-photo.jpg" id="1_nulw4"]
 [ext_resource type="Texture2D" uid="uid://bdw2j5kejiegc" path="res://assets/grids/Dark/texture_01.png" id="2_hmfy4"]
 [ext_resource type="SpriteFrames" uid="uid://dv7jc0mwgowe0" path="res://resources/player_sprite_frames.tres" id="4_omowu"]
+[ext_resource type="Shader" path="res://resources/shadow.gdshader" id="6_rhc71"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3rfj0"]
 sky_top_color = Color(0.133333, 0.572549, 0.819608, 1)
@@ -33,21 +34,39 @@ grow_amount = 2.333
 radius = 0.6
 height = 1.2
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8d6cp"]
+render_priority = 0
+shader = ExtResource("6_rhc71")
+shader_parameter/albedo = Color(0, 0, 0, 1)
+shader_parameter/cube_half_size = 6.0
+shader_parameter/shadow_opacity = 0.5
+shader_parameter/shadow_radius = 0.5
+shader_parameter/shadow_spread = 0.13
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jvaxt"]
+material = SubResource("ShaderMaterial_8d6cp")
+uv2_padding = 4.45
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b6dpv"]
+load_path = "res://.godot/imported/shadow.png-fa649b8bf20b5924dee4fa3287dfd1b8.ctex"
+
 [node name="Main" type="WorldEnvironment"]
 environment = SubResource("Environment_clxjn")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.934826, 0.307841, -0.177016, 0, 0.498488, 0.866897, 0.355107, -0.810397, 0.465999, 0, 0, 0)
-shadow_enabled = true
+transform = Transform3D(-0.853551, 0.442322, -0.275322, 0, 0.528438, 0.848972, 0.52101, 0.72464, -0.451049, 0, 0, 0)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
+layers = 3
 use_collision = true
 size = Vector3(60, 1, 30)
 material = SubResource("StandardMaterial3D_kw42g")
 
 [node name="Player" type="CharacterBody3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.10737, 0)
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_mpj20")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="Player"]
@@ -55,13 +74,24 @@ shape = SubResource("CapsuleShape3D_7u4gu")
 
 [node name="Sprite" type="AnimatedSprite3D" parent="Player"]
 unique_name_in_owner = true
+layers = 2
 pixel_size = 0.0625
-billboard = 1
-alpha_cut = 2
 texture_filter = 2
 sprite_frames = ExtResource("4_omowu")
 animation = &"idle_d"
 autoplay = "idle_d"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.59527, 0)
+mesh = SubResource("PlaneMesh_jvaxt")
+
+[node name="Decal" type="Decal" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
+visible = false
+texture_albedo = SubResource("CompressedTexture2D_b6dpv")
+upper_fade = 1.0
+lower_fade = 1.0
+cull_mask = 1
 
 [node name="CameraController" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -70,4 +100,10 @@ script = ExtResource("1_bfpcc")
 [node name="Camera" type="Camera3D" parent="CameraController"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.38107, 0.924546, 0, -0.924546, 0.38107, 0, 8, 4.5)
+current = true
+size = 23.642
+
+[node name="Camera2" type="Camera3D" parent="CameraController"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0.075, 3.825)
 size = 23.642
