@@ -80,9 +80,8 @@ shape = SubResource("CapsuleShape3D_7u4gu")
 
 [node name="Sprite" type="AnimatedSprite3D" parent="Player"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
 layers = 2
-offset = Vector2(0.5, 0)
+offset = Vector2(0.5, 2)
 pixel_size = 0.0625
 texture_filter = 2
 sprite_frames = ExtResource("4_omowu")
@@ -100,11 +99,6 @@ script = ExtResource("1_bfpcc")
 
 [node name="Camera" type="Camera3D" parent="CameraController"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 4.5)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 7, 7)
 current = true
-size = 23.642
-
-[node name="Camera2" type="Camera3D" parent="CameraController"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0.075, 3.825)
 size = 23.642

@@ -4,8 +4,6 @@ using System;
 public partial class Player : CharacterBody3D {
 	public AnimatedSprite3D Sprite { get; set; }
 	public Vector2 SpriteDirection { get; set; } // should NEVER be equal to Vector2.Zero
-	// public MeshInstance3D Shadow { get; set; }
-	// public RayCast3D GroundRay { get; set; }
 
 	public const float Speed = 5.0f;
 	public const float JumpVelocity = 4.5f;
@@ -14,22 +12,20 @@ public partial class Player : CharacterBody3D {
 
     public override void _Ready() {
 		Sprite = GetNode<AnimatedSprite3D>("%Sprite");
-		// Sprite.Scale = new() {
-		// 	X = Sprite.Scale.X,
-		// 	Y = Sprite.Scale.Y * Mathf.Sqrt(2),
-		// 	Z = Sprite.Scale.Z,
-		// };
-		SpriteDirection = Vector2.Down;
-		// Shadow = GetNode<MeshInstance3D>("%Shadow");
+		
+		var scale = Sprite.Scale;
+		var pos = Sprite.Position;
+		var cam = GetViewport().GetCamera3D();
+		var cosec = 1 / Mathf.Cos(cam.GlobalRotation.X);
+		scale.Y = cosec;
+		Sprite.Scale = scale;
+		pos.Y = (scale.Y - 1) / 2;
+		Sprite.Position = pos;
 
-		// Sprite.Billboard = BaseMaterial3D.BillboardModeEnum.Enabled;
+		SpriteDirection = Vector2.Down;
 	}
 
     public override void _Process(double delta) {
-		// ShadowShader.SetShaderParameter("player_position", GlobalPosition);
-		// var shaderMaterial = (ShaderMaterial)Shadow.Mesh.SurfaceGetMaterial(0);
-		// var rayCollisionHeight = GroundRay.GetCollisionPoint().Y;
-		// shaderMaterial.SetShaderParameter("distance_from_ground", Shadow.GlobalPosition.Y - rayCollisionHeight);
 
     }
 

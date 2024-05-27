@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvcwcbm8garp6"]
+
+[ext_resource type="Shader" path="res://resources/hollow_purple.gdshader" id="1_fvco8"]
+[ext_resource type="Texture2D" uid="uid://cy5cciwqbvcb4" path="res://icon.svg" id="2_tufjt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0j8g6"]
+render_priority = 0
+shader = ExtResource("1_fvco8")
+shader_parameter/zoom = 1.0
+shader_parameter/repeat = 1.0
+shader_parameter/TEXTURE = ExtResource("2_tufjt")
+
+[sub_resource type="QuadMesh" id="QuadMesh_c0i7o"]
+material = SubResource("ShaderMaterial_0j8g6")
+
+[node name="HollowPurple" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_c0i7o")
