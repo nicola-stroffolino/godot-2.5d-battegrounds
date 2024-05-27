@@ -6,7 +6,7 @@
 render_priority = 0
 shader = ExtResource("1_huvqg")
 shader_parameter/albedo = Color(0, 0, 0, 1)
-shader_parameter/cube_half_size = 6.0
-shader_parameter/shadow_opacity = 0.5
+shader_parameter/cube_half_size = 1.0
+shader_parameter/shadow_opacity = 0.765
 shader_parameter/shadow_radius = 0.5
-shader_parameter/shadow_spread = 0.13
+shader_parameter/shadow_spread = 0.232
