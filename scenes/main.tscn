@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cdd8830hlpc3v"]
+[gd_scene load_steps=14 format=3 uid="uid://cdd8830hlpc3v"]
 
 [ext_resource type="Script" path="res://scripts/CameraController.cs" id="1_bfpcc"]
 [ext_resource type="Script" path="res://scripts/Player.cs" id="1_mpj20"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bdw2j5kejiegc" path="res://assets/grids/Dark/texture_01.png" id="2_hmfy4"]
 [ext_resource type="SpriteFrames" uid="uid://dv7jc0mwgowe0" path="res://resources/player_sprite_frames.tres" id="4_omowu"]
 [ext_resource type="Material" uid="uid://7bf6matkg7gr" path="res://resources/shadow.tres" id="5_c3lqi"]
+[ext_resource type="PackedScene" uid="uid://bvcwcbm8garp6" path="res://scenes/hollow_purple.tscn" id="7_ndob2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3rfj0"]
 sky_top_color = Color(0.133333, 0.572549, 0.819608, 1)
@@ -102,3 +103,6 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 7, 7)
 current = true
 size = 23.642
+
+[node name="HollowPurple" parent="." instance=ExtResource("7_ndob2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30151, 1.33747, 0.303269)

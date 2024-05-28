@@ -3,7 +3,12 @@ render_mode unshaded, cull_disabled;
 
 uniform sampler2D TEXTURE;
 uniform sampler2D FRAME;
-uniform sampler2D CORE;
+
+uniform sampler2D NOISE;
+uniform vec2 noise_scale = vec2(1.0, 1.0); // Scale for the noise texture
+uniform vec2 distortion_strength = vec2(0.1, 0.1); // Strength of the distortion
+uniform float time_factor = 1.0; // Factor to animate the noise over time
+
 uniform vec2 offset;
 uniform vec3 color_1: source_color = vec3(1.0, 0.0, 1.0);
 uniform vec3 color_2: source_color = vec3(1.0, 0.0, 1.0);
@@ -22,20 +27,17 @@ vec2 polar_coordinates(vec2 uv, vec2 center, float zoom, float range) {
 
 void fragment() {
 	vec2 polar_uv = polar_coordinates(UV.xy, vec2(0.5), 1.0, 1.0);
-	
 	vec2 panned_uv = polar_uv + vec2(offset.x * TIME, offset.y * TIME);
-	vec2 inv_panned_uv = polar_uv + vec2(-1.0 * offset.x * TIME, offset.y * TIME);
-	
+	vec2 noise_uv = UV * noise_scale + vec2(TIME * time_factor, TIME * time_factor);
+
+	vec4 noise_texture = texture(NOISE, noise_uv);
 	vec4 color = texture(TEXTURE, panned_uv);
-	vec4 inv_color = vec4(1.0 - texture(TEXTURE, panned_uv).rgb, 1.0);
-	vec4 core = texture(CORE, UV);
+	vec4 inv_color = vec4(1.0 - color.rgb, color.a);
+	vec4 alpha = texture(FRAME, UV + (noise_texture.rg - 0.5) * distortion_strength);
 	
 	color.rgb *= color_1;
 	inv_color.rgb *= color_2;
-	core.rgb *= color_3;
 	
-	ALBEDO = color.rgb;
-	ALBEDO += inv_color.rgb;
-	ALBEDO += core.rgb;
-	ALPHA = texture(FRAME, UV).r;// * (inv_color.r + color.r + core.r);
+    ALBEDO = color.rgb + inv_color.rgb;
+    ALPHA = alpha.r * (inv_color.r + color.r);
 }

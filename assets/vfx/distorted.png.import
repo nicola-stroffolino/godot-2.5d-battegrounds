@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ls80k4bl0xv1"
-path.s3tc="res://.godot/imported/T_VFX_Flare_15.PNG-8d9b1c867174411f6d5f29d2a7a5ee6b.s3tc.ctex"
+uid="uid://c04maj80coedy"
+path.s3tc="res://.godot/imported/distorted.png-0f2353e4d26151fde5bece626d2b6a32.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/vfx/T_VFX_Flare_15.PNG"
-dest_files=["res://.godot/imported/T_VFX_Flare_15.PNG-8d9b1c867174411f6d5f29d2a7a5ee6b.s3tc.ctex"]
+source_file="res://assets/vfx/distorted.png"
+dest_files=["res://.godot/imported/distorted.png-0f2353e4d26151fde5bece626d2b6a32.s3tc.ctex"]
 
 [params]
 
