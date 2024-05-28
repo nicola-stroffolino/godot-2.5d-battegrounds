@@ -9,7 +9,6 @@ public partial class Player : CharacterBody3D {
 	public const float JumpVelocity = 4.5f;
 	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 
-
     public override void _Ready() {
 		Sprite = GetNode<AnimatedSprite3D>("%Sprite");
 		

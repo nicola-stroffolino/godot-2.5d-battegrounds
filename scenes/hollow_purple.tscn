@@ -1,14 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvcwcbm8garp6"]
+[gd_scene load_steps=7 format=3 uid="uid://bvcwcbm8garp6"]
 
 [ext_resource type="Shader" path="res://resources/hollow_purple.gdshader" id="1_fvco8"]
-[ext_resource type="Texture2D" uid="uid://cy5cciwqbvcb4" path="res://icon.svg" id="2_tufjt"]
+[ext_resource type="Texture2D" uid="uid://tscc11vd07bv" path="res://assets/vfx/T_VFX_CircleFit1.png" id="2_10f7k"]
+[ext_resource type="Texture2D" uid="uid://c6six1to1yjro" path="res://assets/vfx/T_VFX_Glow_1.PNG" id="2_edsai"]
+[ext_resource type="Texture2D" uid="uid://cokr3o7vi1ayj" path="res://assets/vfx/PerlinNoise_Tiled.png" id="3_g7smo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0j8g6"]
 render_priority = 0
 shader = ExtResource("1_fvco8")
-shader_parameter/zoom = 1.0
-shader_parameter/repeat = 1.0
-shader_parameter/TEXTURE = ExtResource("2_tufjt")
+shader_parameter/offset = Vector2(-0.3, 0.3)
+shader_parameter/color_1 = Color(0.901961, 0.478431, 1, 1)
+shader_parameter/color_2 = Color(0.611765, 0, 0.721569, 1)
+shader_parameter/color_3 = Color(0, 0.701961, 0.92549, 1)
+shader_parameter/TEXTURE = ExtResource("3_g7smo")
+shader_parameter/FRAME = ExtResource("2_10f7k")
+shader_parameter/CORE = ExtResource("2_edsai")
 
 [sub_resource type="QuadMesh" id="QuadMesh_c0i7o"]
 material = SubResource("ShaderMaterial_0j8g6")
