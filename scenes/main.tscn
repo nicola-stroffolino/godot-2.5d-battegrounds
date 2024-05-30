@@ -105,4 +105,4 @@ current = true
 size = 23.642
 
 [node name="HollowPurple" parent="." instance=ExtResource("7_ndob2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30151, 1.33747, 0.303269)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43, 1.115, 0)

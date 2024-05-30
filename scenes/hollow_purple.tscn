@@ -1,9 +1,12 @@
-[gd_scene load_steps=25 format=3 uid="uid://bvcwcbm8garp6"]
+[gd_scene load_steps=34 format=3 uid="uid://bvcwcbm8garp6"]
 
 [ext_resource type="Shader" path="res://resources/hollow_purple.gdshader" id="1_fvco8"]
 [ext_resource type="Shader" path="res://resources/hollow_purple_outline.gdshader" id="1_jdvqn"]
 [ext_resource type="Texture2D" uid="uid://c6six1to1yjro" path="res://assets/vfx/T_VFX_Glow_1.PNG" id="2_edsai"]
-[ext_resource type="Texture2D" uid="uid://cokr3o7vi1ayj" path="res://assets/vfx/PerlinNoise_Tiled.png" id="3_uwn8c"]
+[ext_resource type="Texture2D" uid="uid://t1qvsgbbcq4n" path="res://assets/vfx/Particles/light_01.png" id="3_v1l8j"]
+[ext_resource type="Texture2D" uid="uid://53tof6snhrul" path="res://assets/vfx/Particles/scorch_03.png" id="4_4qldx"]
+[ext_resource type="Texture2D" uid="uid://c5iaqysamqvet" path="res://assets/vfx/Particles/magic_05.png" id="5_5xy7c"]
+[ext_resource type="Texture2D" uid="uid://c1lhmttv8x201" path="res://assets/vfx/Particles/circle_05.png" id="6_kajv7"]
 [ext_resource type="Texture2D" uid="uid://c04maj80coedy" path="res://assets/vfx/distorted.png" id="6_rgtu1"]
 [ext_resource type="Texture2D" uid="uid://co2opvx25ofx3" path="res://assets/vfx/Noise1_tiled.png" id="7_c8oie"]
 [ext_resource type="Texture2D" uid="uid://f3b2akfn2lcn" path="res://assets/vfx/T_VFX_Noise_4.PNG" id="8_bfh8o"]
@@ -14,10 +17,9 @@ load_path = "res://.godot/imported/T_VFX_CircleFit1.png-41ebbd986e15b3b81f1b66b7
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pv6rl"]
 render_priority = 0
 shader = ExtResource("1_fvco8")
-shader_parameter/offset = Vector2(-1, 0.3)
+shader_parameter/offset = Vector2(1, 0)
 shader_parameter/color_1 = Color(0.219608, 0, 0.341176, 1)
 shader_parameter/color_2 = Color(0.145098, 0, 0.235294, 1)
-shader_parameter/TEXTURE = ExtResource("7_c8oie")
 shader_parameter/FRAME = SubResource("CompressedTexture2D_o4jai")
 
 [sub_resource type="QuadMesh" id="QuadMesh_rqp8u"]
@@ -29,63 +31,97 @@ load_path = "res://.godot/imported/T_VFX_CircleFit1.png-41ebbd986e15b3b81f1b66b7
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3d0j2"]
 render_priority = 1
 shader = ExtResource("1_fvco8")
-shader_parameter/offset = Vector2(-1, 2)
+shader_parameter/offset = Vector2(1, 5)
 shader_parameter/color_1 = Color(0.219608, 0, 0.341176, 1)
 shader_parameter/color_2 = Color(0.337255, 0, 0.647059, 1)
-shader_parameter/TEXTURE = ExtResource("7_c8oie")
 shader_parameter/FRAME = SubResource("CompressedTexture2D_6jqy1")
 
 [sub_resource type="QuadMesh" id="QuadMesh_s0d7t"]
 material = SubResource("ShaderMaterial_3d0j2")
-size = Vector2(0.95, 0.95)
+size = Vector2(0.97, 0.97)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5vaoh"]
 render_priority = 3
 shader = ExtResource("1_fvco8")
-shader_parameter/offset = Vector2(-1, 3)
+shader_parameter/offset = Vector2(2, 2)
 shader_parameter/color_1 = Color(1, 0.470588, 0.988235, 1)
 shader_parameter/color_2 = Color(0.811765, 0.188235, 0.996078, 1)
-shader_parameter/TEXTURE = ExtResource("7_c8oie")
-shader_parameter/FRAME = ExtResource("2_edsai")
+shader_parameter/FRAME = ExtResource("3_v1l8j")
 
 [sub_resource type="QuadMesh" id="QuadMesh_ccfbk"]
 material = SubResource("ShaderMaterial_5vaoh")
+size = Vector2(0.95, 0.95)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4bf46"]
 render_priority = 4
 shader = ExtResource("1_fvco8")
-shader_parameter/offset = Vector2(5, 1)
-shader_parameter/color_1 = Color(1, 1, 1, 1)
-shader_parameter/color_2 = Color(0.941176, 0.690196, 1, 1)
-shader_parameter/TEXTURE = ExtResource("3_uwn8c")
+shader_parameter/offset = Vector2(3, 1)
+shader_parameter/color_1 = Color(0.996078, 0.623529, 1, 1)
+shader_parameter/color_2 = Color(0.900559, 0.478079, 1, 1)
 shader_parameter/FRAME = ExtResource("2_edsai")
 
 [sub_resource type="QuadMesh" id="QuadMesh_qvr2j"]
 material = SubResource("ShaderMaterial_4bf46")
-size = Vector2(0.7, 0.7)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d3jc4"]
 render_priority = 5
 shader = ExtResource("1_fvco8")
 shader_parameter/offset = null
-shader_parameter/color_1 = Color(1, 0.870588, 0.988235, 1)
+shader_parameter/color_1 = Color(1, 1, 1, 1)
 shader_parameter/color_2 = Color(1, 0, 1, 1)
-shader_parameter/FRAME = ExtResource("2_edsai")
+shader_parameter/FRAME = ExtResource("4_4qldx")
 
 [sub_resource type="QuadMesh" id="QuadMesh_2nnsm"]
 material = SubResource("ShaderMaterial_d3jc4")
-size = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ux4ql"]
+render_priority = 6
+shader = ExtResource("1_fvco8")
+shader_parameter/offset = null
+shader_parameter/color_1 = Color(1, 1, 1, 1)
+shader_parameter/color_2 = Color(1, 0, 1, 1)
+shader_parameter/FRAME = ExtResource("5_5xy7c")
+
+[sub_resource type="QuadMesh" id="QuadMesh_hsn87"]
+material = SubResource("ShaderMaterial_ux4ql")
+size = Vector2(0.7, 0.7)
+
+[sub_resource type="Curve" id="Curve_sql75"]
+max_value = 100.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.953571, 0), 0.0, 0.0, 0, 0, Vector2(1, 18.4906), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ws50s"]
+curve = SubResource("Curve_sql75")
+
+[sub_resource type="Curve" id="Curve_4moj5"]
+_data = [Vector2(0, 0.486792), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_girvh"]
+curve = SubResource("Curve_4moj5")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sn2e8"]
 spread = 180.0
 initial_velocity_min = 1.0
 initial_velocity_max = 1.0
 gravity = Vector3(0, 0, 0)
+damping_max = 8.642
+damping_curve = SubResource("CurveTexture_ws50s")
+scale_min = 0.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_girvh")
+turbulence_noise_strength = 20.0
+turbulence_noise_scale = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7puig"]
 render_priority = 6
+blend_mode = 1
 shading_mode = 0
-albedo_color = Color(0, 1, 1, 1)
+albedo_texture = ExtResource("6_kajv7")
+albedo_texture_force_srgb = true
+billboard_mode = 1
+billboard_keep_scale = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_4ndq4"]
 material = SubResource("StandardMaterial3D_7puig")
@@ -112,27 +148,27 @@ size = Vector2(2, 2)
 [node name="HollowPurple" type="Node3D"]
 
 [node name="Sphere" type="MeshInstance3D" parent="."]
-visible = false
 mesh = SubResource("QuadMesh_rqp8u")
 
 [node name="Sphere2" type="MeshInstance3D" parent="."]
-visible = false
 mesh = SubResource("QuadMesh_s0d7t")
 
 [node name="Sphere3" type="MeshInstance3D" parent="."]
-visible = false
 mesh = SubResource("QuadMesh_ccfbk")
 
 [node name="Sphere4" type="MeshInstance3D" parent="."]
-visible = false
 mesh = SubResource("QuadMesh_qvr2j")
 
 [node name="Sphere5" type="MeshInstance3D" parent="."]
-visible = false
 mesh = SubResource("QuadMesh_2nnsm")
 
+[node name="Sphere6" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_hsn87")
+skeleton = NodePath("../Sphere5")
+
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-lifetime = 0.3
+amount = 2000
+lifetime = 0.39
 visibility_aabb = AABB(-0.5, -0.5, -0.5, 1, 1, 1)
 process_material = SubResource("ParticleProcessMaterial_sn2e8")
 draw_pass_1 = SubResource("QuadMesh_4ndq4")
