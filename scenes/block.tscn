@@ -1,0 +1,153 @@
+[gd_scene load_steps=13 format=3 uid="uid://cesl6itumia3r"]
+
+[ext_resource type="Material" uid="uid://bjkhbwi0g52df" path="res://resources/ground_material.tres" id="1_vuysm"]
+[ext_resource type="Texture2D" uid="uid://bdw2j5kejiegc" path="res://assets/grids/Dark/texture_01.png" id="2_uxhfb"]
+
+[sub_resource type="Gradient" id="Gradient_bjgc2"]
+offsets = PackedFloat32Array(0.79085, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3y5ys"]
+gradient = SubResource("Gradient_bjgc2")
+
+[sub_resource type="Curve" id="Curve_eajiy"]
+_data = [Vector2(0, 0.494505), 0.0, -1.14751, 0, 0, Vector2(0.198895, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hysp3"]
+curve = SubResource("Curve_eajiy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_58xv3"]
+lifetime_randomness = 1.0
+emission_shape = 3
+emission_box_extents = Vector3(0.5, 0.5, 0.5)
+direction = Vector3(0, 0, 0)
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.5
+radial_velocity_max = 1.0
+radial_velocity_curve = SubResource("CurveTexture_hysp3")
+scale_max = 2.0
+scale_over_velocity_max = 1.0
+color_ramp = SubResource("GradientTexture1D_3y5ys")
+turbulence_noise_strength = 20.0
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ntg6d"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_uxhfb")
+billboard_keep_scale = true
+grow_amount = 2.333
+
+[sub_resource type="BoxMesh" id="BoxMesh_6ax4w"]
+material = SubResource("StandardMaterial3D_ntg6d")
+size = Vector3(0.063, 0.063, 0.063)
+
+[sub_resource type="Animation" id="Animation_yyefc"]
+resource_name = "break"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles3D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CSGBox3D:use_collision")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CSGBox3D:transparency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_nfpsi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles3D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CSGBox3D:use_collision")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CSGBox3D:transparency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q048k"]
+_data = {
+"RESET": SubResource("Animation_nfpsi"),
+"break": SubResource("Animation_yyefc")
+}
+
+[node name="Block" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+use_collision = true
+collision_mask = 3
+material = ExtResource("1_vuysm")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 2048
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_58xv3")
+draw_pass_1 = SubResource("BoxMesh_6ax4w")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_q048k")
+}

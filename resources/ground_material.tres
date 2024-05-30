@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bjkhbwi0g52df"]
+
+[ext_resource type="Texture2D" uid="uid://bdw2j5kejiegc" path="res://assets/grids/Dark/texture_01.png" id="1_fcfbp"]
+
+[resource]
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_fcfbp")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+billboard_keep_scale = true
+grow_amount = 2.333

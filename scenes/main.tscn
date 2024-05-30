@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cdd8830hlpc3v"]
+[gd_scene load_steps=16 format=3 uid="uid://cdd8830hlpc3v"]
 
 [ext_resource type="Script" path="res://scripts/CameraController.cs" id="1_bfpcc"]
 [ext_resource type="Script" path="res://scripts/Player.cs" id="1_mpj20"]
@@ -6,7 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bdw2j5kejiegc" path="res://assets/grids/Dark/texture_01.png" id="2_hmfy4"]
 [ext_resource type="SpriteFrames" uid="uid://dv7jc0mwgowe0" path="res://resources/player_sprite_frames.tres" id="4_omowu"]
 [ext_resource type="Material" uid="uid://7bf6matkg7gr" path="res://resources/shadow.tres" id="5_c3lqi"]
-[ext_resource type="PackedScene" uid="uid://bvcwcbm8garp6" path="res://scenes/hollow_purple.tscn" id="7_ndob2"]
+[ext_resource type="PackedScene" uid="uid://cesl6itumia3r" path="res://scenes/block.tscn" id="7_rpa07"]
+[ext_resource type="Script" path="res://scripts/Block.cs" id="9_wxs1a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3rfj0"]
 sky_top_color = Color(0.133333, 0.572549, 0.819608, 1)
@@ -23,6 +24,14 @@ sky_material = SubResource("ProceduralSkyMaterial_3rfj0")
 [sub_resource type="Environment" id="Environment_clxjn"]
 background_mode = 2
 sky = SubResource("Sky_ejy1g")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s1ydl"]
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_hmfy4")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+billboard_keep_scale = true
+grow_amount = 2.333
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kw42g"]
 albedo_texture = ExtResource("2_hmfy4")
@@ -48,8 +57,13 @@ transform = Transform3D(-0.853551, 0.442322, -0.275322, 0, 0.528438, 0.848972, 0
 [node name="Ground" type="CSGBox3D" parent="."]
 layers = 3
 use_collision = true
+collision_mask = 3
 size = Vector3(60, 1, 30)
-material = SubResource("StandardMaterial3D_kw42g")
+material = SubResource("StandardMaterial3D_s1ydl")
+
+[node name="ParticleCollision" type="GPUParticlesCollisionBox3D" parent="."]
+layers = 3
+size = Vector3(60, 1, 30)
 
 [node name="Box" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 0)
@@ -104,5 +118,6 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 current = true
 size = 23.642
 
-[node name="HollowPurple" parent="." instance=ExtResource("7_ndob2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43, 1.115, 0)
+[node name="Block" parent="." instance=ExtResource("7_rpa07")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 2)
+script = ExtResource("9_wxs1a")
