@@ -15,6 +15,13 @@ public partial class FSM : Node {
 		States = new();
         foreach (var child in GetChildren()) {
         	if (child is State s) {
+				s.StateMachine = this;
+				s.Player = (Player)GetParent();
+				s.Sprite = GetParent().GetNode<AnimatedSprite3D>("%Sprite");
+				if (s is Attack a) {
+					a.AttackHitBox = GetParent().GetNode<Area3D>("HitBox");
+					a.AttackHitBox.Connect(Area3D.SignalName.BodyEntered, new Callable(a, Attack.MethodName.OnAttackHitBoxEntered));	
+				}
 				States[s.Name.ToString().ToLower()] = s;
         	}
         }
@@ -52,7 +59,7 @@ public partial class FSM : Node {
 		CurrentState = newState;
 		CurrentState.Enter();
 
-		EmitSignal(Signals.SignalName.StateTransitioned, PreviousState, CurrentState);
+		EventBus.Instance.EmitSignal(EventBus.SignalName.StateTransitioned, PreviousState, CurrentState);
 	}
 
 	public void ChangeState(string newStateName) {
@@ -63,7 +70,7 @@ public partial class FSM : Node {
 		CurrentState = newState;
 		CurrentState.Enter();
 
-		EmitSignal(Signals.SignalName.StateTransitioned, PreviousState, CurrentState);
+		EventBus.Instance.EmitSignal(EventBus.SignalName.StateTransitioned, PreviousState, CurrentState);
 	}
 
 	public State GetState<T>() where T: State => States.OfType<T>().FirstOrDefault();

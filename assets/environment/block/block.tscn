@@ -127,7 +127,8 @@ _data = {
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 use_collision = true
-collision_mask = 3
+collision_layer = 4
+collision_mask = 0
 material = ExtResource("1_tvnub")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
