@@ -1,7 +1,7 @@
 [gd_scene load_steps=34 format=3 uid="uid://bvcwcbm8garp6"]
 
-[ext_resource type="Shader" path="res://resources/hollow_purple.gdshader" id="1_fvco8"]
-[ext_resource type="Shader" path="res://resources/hollow_purple_outline.gdshader" id="1_jdvqn"]
+[ext_resource type="Shader" path="res://assets/shaders/hollow_purple.gdshader" id="1_fvco8"]
+[ext_resource type="Shader" path="res://assets/shaders/hollow_purple_outline.gdshader" id="1_jdvqn"]
 [ext_resource type="Texture2D" uid="uid://c6six1to1yjro" path="res://assets/vfx/T_VFX_Glow_1.PNG" id="2_edsai"]
 [ext_resource type="Texture2D" uid="uid://t1qvsgbbcq4n" path="res://assets/vfx/Particles/light_01.png" id="3_v1l8j"]
 [ext_resource type="Texture2D" uid="uid://53tof6snhrul" path="res://assets/vfx/Particles/scorch_03.png" id="4_4qldx"]

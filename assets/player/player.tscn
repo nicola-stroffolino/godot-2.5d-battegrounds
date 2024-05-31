@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://dda7w4gh54ht4"]
+
+[ext_resource type="Script" path="res://src/Player.cs" id="1_lfvy3"]
+[ext_resource type="SpriteFrames" uid="uid://dv7jc0mwgowe0" path="res://assets/player/player_sprite_frames.tres" id="2_qmaqy"]
+[ext_resource type="Shader" path="res://assets/shaders/shadow.gdshader" id="3_5tcad"]
+[ext_resource type="Script" path="res://src/FSM.cs" id="4_l0rr5"]
+[ext_resource type="Script" path="res://src/states/Idle.cs" id="5_p85yn"]
+[ext_resource type="Script" path="res://src/states/Walk.cs" id="6_k608t"]
+[ext_resource type="Script" path="res://src/states/Attack.cs" id="7_a4v6f"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7u4gu"]
+margin = 0.0
+radius = 0.3
+height = 0.99
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dvo3d"]
+render_priority = 0
+shader = ExtResource("3_5tcad")
+shader_parameter/albedo = Color(0, 0, 0, 1)
+shader_parameter/cube_half_size = 1.0
+shader_parameter/shadow_opacity = 0.765
+shader_parameter/shadow_radius = 0.5
+shader_parameter/shadow_spread = 0.232
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jvaxt"]
+material = SubResource("ShaderMaterial_dvo3d")
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_lfvy3")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_7u4gu")
+
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+unique_name_in_owner = true
+layers = 2
+offset = Vector2(0.5, 2)
+pixel_size = 0.0625
+texture_filter = 2
+sprite_frames = ExtResource("2_qmaqy")
+animation = &"idle_d"
+autoplay = "idle_d"
+
+[node name="Shadow" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49, 0)
+mesh = SubResource("PlaneMesh_jvaxt")
+
+[node name="MovementFSM" type="Node" parent="." node_paths=PackedStringArray("InitialState")]
+script = ExtResource("4_l0rr5")
+InitialState = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="MovementFSM"]
+script = ExtResource("5_p85yn")
+
+[node name="Walk" type="Node" parent="MovementFSM"]
+script = ExtResource("6_k608t")
+
+[node name="Attack" type="Node" parent="MovementFSM"]
+script = ExtResource("7_a4v6f")
