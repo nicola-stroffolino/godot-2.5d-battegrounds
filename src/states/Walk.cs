@@ -11,7 +11,10 @@ public partial class Walk : State {
 		};
 
         if (inputDirection == Vector2.Zero) return "Idle";
+
         SpriteDirection = inputDirection;
+        var rotation = Mathf.Atan2(inputDirection.X, inputDirection.Y);
+        Player.Rotation = new(0, rotation, 0);
 
         Sprite.Play("walk_" + Game.Directions[inputDirection]);
 

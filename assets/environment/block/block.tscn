@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://cesl6itumia3r"]
+[gd_scene load_steps=13 format=3 uid="uid://cesl6itumia3r"]
 
 [ext_resource type="Material" uid="uid://xt7iiqba8fx" path="res://assets/environment/block/block_material.tres" id="1_tvnub"]
+[ext_resource type="Script" path="res://src/Block.cs" id="2_wxchl"]
 
 [sub_resource type="Gradient" id="Gradient_bjgc2"]
 offsets = PackedFloat32Array(0.79085, 1)
@@ -39,97 +40,124 @@ collision_bounce = 0.4
 material = ExtResource("1_tvnub")
 size = Vector3(0.063, 0.063, 0.063)
 
-[sub_resource type="Animation" id="Animation_nfpsi"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ybeti"]
+size = Vector3(1.2, 1.2, 1.2)
+
+[sub_resource type="Animation" id="Animation_73k2w"]
+resource_name = "break"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:use_collision")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:transparency")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HurtBox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GPUParticles3D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_px6r4"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("GPUParticles3D:emitting")
+tracks/0/path = NodePath(".:use_collision")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CSGBox3D:use_collision")
+tracks/1/path = NodePath(".:transparency")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CSGBox3D:transparency")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
 }
-
-[sub_resource type="Animation" id="Animation_yyefc"]
-resource_name = "break"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GPUParticles3D:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CSGBox3D:use_collision")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CSGBox3D:transparency")
+tracks/2/path = NodePath("HurtBox:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GPUParticles3D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_q048k"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2e8ta"]
 _data = {
-"RESET": SubResource("Animation_nfpsi"),
-"break": SubResource("Animation_yyefc")
+"RESET": SubResource("Animation_px6r4"),
+"break": SubResource("Animation_73k2w")
 }
 
-[node name="Block" type="Node3D"]
-
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="CSGBox3D" type="CSGBox3D"]
 use_collision = true
-collision_layer = 4
+collision_layer = 5
 collision_mask = 0
 material = ExtResource("1_tvnub")
+script = ExtResource("2_wxchl")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 emitting = false
@@ -140,7 +168,14 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_58xv3")
 draw_pass_1 = SubResource("BoxMesh_6ax4w")
 
+[node name="HurtBox" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+shape = SubResource("BoxShape3D_ybeti")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_q048k")
+"": SubResource("AnimationLibrary_2e8ta")
 }

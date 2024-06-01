@@ -18,10 +18,7 @@ public partial class FSM : Node {
 				s.StateMachine = this;
 				s.Player = (Player)GetParent();
 				s.Sprite = GetParent().GetNode<AnimatedSprite3D>("%Sprite");
-				if (s is Attack a) {
-					a.AttackHitBox = GetParent().GetNode<Area3D>("HitBox");
-					a.AttackHitBox.Connect(Area3D.SignalName.BodyEntered, new Callable(a, Attack.MethodName.OnAttackHitBoxEntered));	
-				}
+				if (s is Attack a) a.AttackHitBox = GetParent().GetNode<Area3D>("HitBox");
 				States[s.Name.ToString().ToLower()] = s;
         	}
         }
