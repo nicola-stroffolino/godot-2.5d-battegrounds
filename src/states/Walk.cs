@@ -2,8 +2,6 @@ using Godot;
 using System;
 
 public partial class Walk : State {
-    public Vector2 SpriteDirection { get; set; } // should NEVER be equal to Vector2.Zero
-
     public override string StatePhysicsProcess(float delta) {
         var inputDirection = new Vector2 {
 			X = Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left"),
@@ -12,7 +10,8 @@ public partial class Walk : State {
 
         if (inputDirection == Vector2.Zero) return "Idle";
 
-        SpriteDirection = inputDirection;
+        Player.SpriteDirection = inputDirection;
+
         var rotation = Mathf.Atan2(inputDirection.X, inputDirection.Y);
         Player.Rotation = new(0, rotation, 0);
 

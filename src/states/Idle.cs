@@ -3,12 +3,7 @@ using System;
 
 public partial class Idle : State {
     public override void Enter() {
-        var prevState = StateMachine.PreviousState;
-        if (prevState is Walk ws) {
-            Sprite.Play("idle_" + Game.Directions[ws.SpriteDirection]);
-        } else {
-            Sprite.Play("idle_" + Game.Directions[Vector2.Down]);
-        }
+        Sprite.Play("idle_" + Game.Directions[Player.SpriteDirection]);
 
         Player.Velocity = Vector3.Zero;
     }

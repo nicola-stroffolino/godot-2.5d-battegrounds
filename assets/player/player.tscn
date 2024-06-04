@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dda7w4gh54ht4"]
+[gd_scene load_steps=13 format=3 uid="uid://dda7w4gh54ht4"]
 
 [ext_resource type="Script" path="res://src/Player.cs" id="1_lfvy3"]
 [ext_resource type="SpriteFrames" uid="uid://dv7jc0mwgowe0" path="res://assets/player/player_sprite_frames.tres" id="2_qmaqy"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://src/states/Idle.cs" id="5_p85yn"]
 [ext_resource type="Script" path="res://src/states/Walk.cs" id="6_k608t"]
 [ext_resource type="Script" path="res://src/states/Attack.cs" id="7_a4v6f"]
+[ext_resource type="Script" path="res://src/HitBox.cs" id="8_a7ai8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7u4gu"]
 margin = 0.0
@@ -26,44 +27,7 @@ shader_parameter/shadow_spread = 0.232
 material = SubResource("ShaderMaterial_dvo3d")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fsswo"]
-size = Vector3(0.5, 1, 0.4)
-
-[sub_resource type="Animation" id="Animation_tdu5o"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("HitBox:monitoring")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_cwkyj"]
-resource_name = "attack"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("HitBox:monitoring")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_aptv5"]
-_data = {
-"RESET": SubResource("Animation_tdu5o"),
-"attack": SubResource("Animation_cwkyj")
-}
+size = Vector3(0.4, 0.4, 0.4)
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -78,7 +42,6 @@ unique_name_in_owner = true
 layers = 2
 offset = Vector2(0.5, 2)
 pixel_size = 0.0625
-billboard = 2
 texture_filter = 2
 sprite_frames = ExtResource("2_qmaqy")
 animation = &"idle_d"
@@ -103,19 +66,16 @@ script = ExtResource("6_k608t")
 script = ExtResource("7_a4v6f")
 
 [node name="Timer" type="Timer" parent="MovementFSM/Attack"]
-wait_time = 2.0
+wait_time = 0.2
 one_shot = true
 
 [node name="HitBox" type="Area3D" parent="."]
-collision_layer = 2
-collision_mask = 6
+collision_layer = 8
+collision_mask = 0
 monitoring = false
+monitorable = false
+script = ExtResource("8_a7ai8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.500397)
 shape = SubResource("BoxShape3D_fsswo")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_aptv5")
-}

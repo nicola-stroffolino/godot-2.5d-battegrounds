@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 public partial class Attack : State {
-    public Area3D AttackHitBox { get; set; }
+    public HitBox AttackHitBox { get; set; }
     public Timer Timer { get; set; }
     private bool _exited = false;
 
@@ -13,18 +13,28 @@ public partial class Attack : State {
 
     public override void Enter() {        
         Player.Velocity = Vector3.Zero;
-        AttackHitBox.Monitoring = true;
+
+        AttackHitBox.AttackVelocity = new Vector3(Player.SpriteDirection.X, 0, Player.SpriteDirection.Y);
+        AttackHitBox.Monitorable = true;
+        
+        Sprite.Play("attack_" + Game.Directions[Player.SpriteDirection]);
         Timer.Start();
     }
 
     public override void Exit() {
-        AttackHitBox.Monitoring = false;
+        AttackHitBox.Monitorable = false;
         _exited = false;
     }
 
     public override string StateProcess(float delta) {
-        if (_exited) return "Idle";
-        return base.StateProcess(delta);
+        if (!_exited) return null;
+
+        if (Input.IsActionPressed("move_up") ||
+        Input.IsActionPressed("move_down") ||
+        Input.IsActionPressed("move_right") ||
+        Input.IsActionPressed("move_left")) return "Walk";
+
+        return "Idle";
     }
 
     public void SetExited() {
