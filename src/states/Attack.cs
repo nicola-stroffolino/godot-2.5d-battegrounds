@@ -12,12 +12,12 @@ public partial class Attack : State {
     }
 
     public override void Enter() {        
-        Player.Velocity = Vector3.Zero;
+        StateOwner.Velocity = Vector3.Zero;
 
-        AttackHitBox.AttackVelocity = new Vector3(Player.SpriteDirection.X, 0, Player.SpriteDirection.Y);
+        AttackHitBox.AttackVelocity = new Vector3(StateOwner.SpriteDirection.X, 0, StateOwner.SpriteDirection.Y);
         AttackHitBox.Monitorable = true;
         
-        Sprite.Play("attack_" + Game.Directions[Player.SpriteDirection]);
+        Sprite.Play("attack_" + Game.Directions[StateOwner.SpriteDirection]);
         Timer.Start();
     }
 
@@ -29,10 +29,7 @@ public partial class Attack : State {
     public override string StateProcess(float delta) {
         if (!_exited) return null;
 
-        if (Input.IsActionPressed("move_up") ||
-        Input.IsActionPressed("move_down") ||
-        Input.IsActionPressed("move_right") ||
-        Input.IsActionPressed("move_left")) return "Walk";
+        if (StateOwner.WantsToMove()) return "Walk";
 
         return "Idle";
     }

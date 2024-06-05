@@ -3,8 +3,6 @@ using System;
 using System.Linq;
 
 public partial class EnemyWalk : State {
-	public Enemy Enemy { get; set; }
-
     public override string StatePhysicsProcess(float delta) {
 		Vector3 d = Enemy.GlobalPosition.DirectionTo(Enemy.Target.GlobalPosition);
 
@@ -19,8 +17,9 @@ public partial class EnemyWalk : State {
 
 		Sprite.Play("walk_" + Game.Directions[Enemy.SpriteDirection]);
 
-        var direction = d.Normalized();
-		Enemy.Velocity = new(direction.X * Enemy.Speed, 0f, direction.Z * Enemy.Speed);
+		var direction = d.Normalized();
+		Enemy.SetVelocity(new(direction.X * Enemy.Speed, 0f, direction.Z * Enemy.Speed));
+		// Enemy.Velocity = new(direction.X * Enemy.Speed, 0f, direction.Z * Enemy.Speed);
 
         return base.StatePhysicsProcess(delta);
     }

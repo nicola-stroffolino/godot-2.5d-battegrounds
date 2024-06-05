@@ -2,29 +2,29 @@ using Godot;
 using System;
 
 public partial class Walk : State {
+    public override string StateProcess(float delta) {
+        if (StateOwner.WantsToAttack()) return "Attack";
+    
+        if (!StateOwner.WantsToMove()) return "Idle";
+    
+        return base.StateProcess(delta);
+    }
+
     public override string StatePhysicsProcess(float delta) {
-        var inputDirection = new Vector2 {
-			X = Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left"),
-			Y = Input.GetActionStrength("move_down") - Input.GetActionStrength("move_up")
-		};
+        StateOwner.SpriteDirection = StateOwner.MoveDirection;
 
-        if (inputDirection == Vector2.Zero) return "Idle";
+        var rotation = Mathf.Atan2(StateOwner.SpriteDirection.X, StateOwner.SpriteDirection.Y);
+        StateOwner.Rotation = new(0, rotation, 0);
 
-        Player.SpriteDirection = inputDirection;
+        Sprite.Play("walk_" + Game.Directions[StateOwner.SpriteDirection]);
 
-        var rotation = Mathf.Atan2(inputDirection.X, inputDirection.Y);
-        Player.Rotation = new(0, rotation, 0);
-
-        Sprite.Play("walk_" + Game.Directions[inputDirection]);
-
-        inputDirection = inputDirection.Normalized();
-        Player.Velocity = new(inputDirection.X * Player.Speed, 0f, inputDirection.Y * Player.Speed);
+        var direction = StateOwner.SpriteDirection.Normalized();
+        StateOwner.Velocity = new(direction.X * GameEntity3D.Speed, 0f, direction.Y * GameEntity3D.Speed);
 
         return base.StatePhysicsProcess(delta);
     }
 
     public override string StateInput(InputEvent @event) {
-        if (@event.IsActionPressed("attack")) return "Attack";
 
         return base.StateInput(@event);
     }

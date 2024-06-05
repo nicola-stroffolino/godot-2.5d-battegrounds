@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://3rgk0ba6elhf"]
+
+[ext_resource type="Script" path="res://src/HitBox.cs" id="1_80j2m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fsswo"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[node name="HitBox" type="Area3D"]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("1_80j2m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_fsswo")

@@ -7,7 +7,8 @@
 [ext_resource type="Script" path="res://src/states/Idle.cs" id="5_p85yn"]
 [ext_resource type="Script" path="res://src/states/Walk.cs" id="6_k608t"]
 [ext_resource type="Script" path="res://src/states/Attack.cs" id="7_a4v6f"]
-[ext_resource type="Script" path="res://src/HitBox.cs" id="8_a7ai8"]
+[ext_resource type="PackedScene" uid="uid://3rgk0ba6elhf" path="res://assets/components/hit_box.tscn" id="8_n2v4w"]
+[ext_resource type="PackedScene" uid="uid://kq28773phojk" path="res://assets/components/hurt_box.tscn" id="9_0e32e"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7u4gu"]
 margin = 0.0
@@ -25,9 +26,6 @@ shader_parameter/shadow_spread = 0.232
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_jvaxt"]
 material = SubResource("ShaderMaterial_dvo3d")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_fsswo"]
-size = Vector3(0.4, 0.4, 0.4)
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -69,13 +67,7 @@ script = ExtResource("7_a4v6f")
 wait_time = 0.2
 one_shot = true
 
-[node name="HitBox" type="Area3D" parent="."]
-collision_layer = 8
-collision_mask = 0
-monitoring = false
-monitorable = false
-script = ExtResource("8_a7ai8")
+[node name="HitBox" parent="." instance=ExtResource("8_n2v4w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.500397)
-shape = SubResource("BoxShape3D_fsswo")
+[node name="HurtBox" parent="." instance=ExtResource("9_0e32e")]

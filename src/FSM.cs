@@ -16,11 +16,7 @@ public partial class FSM : Node {
         foreach (var child in GetChildren()) {
         	if (child is State s) {
 				s.StateMachine = this;
-				
-				if (s is EnemyIdle ei) ei.Enemy = (Enemy)GetParent();
-				else if (s is EnemyWalk ew) ew.Enemy = (Enemy)GetParent();
-				else s.Player = (Player)GetParent();
-				
+				s.StateOwner = (GameEntity3D)GetParent();
 				s.Sprite = GetParent().GetNode<AnimatedSprite3D>("%Sprite");
 				if (s is Attack a) a.AttackHitBox = GetParent().GetNode<HitBox>("HitBox");
 				States[s.Name.ToString().ToLower()] = s;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dk0vubj1v554k"]
+[gd_scene load_steps=12 format=3 uid="uid://dk0vubj1v554k"]
 
 [ext_resource type="Script" path="res://src/Enemy.cs" id="1_2ihc8"]
 [ext_resource type="SpriteFrames" uid="uid://dv7jc0mwgowe0" path="res://assets/player/player_sprite_frames.tres" id="2_8x5ow"]
@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://src/FSM.cs" id="4_mnw5b"]
 [ext_resource type="Script" path="res://src/states/EnemyIdle.cs" id="5_l6xxs"]
 [ext_resource type="Script" path="res://src/states/EnemyWalk.cs" id="6_r47ye"]
-[ext_resource type="Script" path="res://src/HitBox.cs" id="7_mac62"]
+[ext_resource type="PackedScene" uid="uid://kq28773phojk" path="res://assets/components/hurt_box.tscn" id="8_ivtsx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gmjxb"]
 margin = 0.0
@@ -27,9 +27,6 @@ material = SubResource("ShaderMaterial_dvo3d")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tsrqq"]
 radius = 5.0
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_hecgl"]
-size = Vector3(0.4, 0.4, 0.4)
 
 [node name="GenericEnemy" type="CharacterBody3D"]
 collision_layer = 2
@@ -72,13 +69,4 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionRange"]
 shape = SubResource("SphereShape3D_tsrqq")
 
-[node name="HitBox" type="Area3D" parent="."]
-collision_layer = 8
-collision_mask = 0
-monitoring = false
-monitorable = false
-script = ExtResource("7_mac62")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.500397)
-shape = SubResource("BoxShape3D_hecgl")
+[node name="HurtBox" parent="." instance=ExtResource("8_ivtsx")]

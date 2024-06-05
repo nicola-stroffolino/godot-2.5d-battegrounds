@@ -6,7 +6,7 @@ using System.Linq;
 [GlobalClass]
 public partial class State : Node {
 	public FSM StateMachine { get; set; }
-	public Player Player { get; set; }
+	public GameEntity3D StateOwner { get; set; }
 	public AnimatedSprite3D Sprite { get; set; }
 
 	public virtual void Enter() {}
