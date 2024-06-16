@@ -14,8 +14,6 @@ public partial class HurtBox : Area3D {
 
         if (Parent is not Enemy e) return;
 
-        // e.Velocity += hitBox.AttackVelocity * 100;
-        e.SetVelocity(e.GetVelocity() + hitBox.AttackVelocity * 100);
-        GD.Print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        e.Velocity += hitBox.AttackVelocity;
     }
 }

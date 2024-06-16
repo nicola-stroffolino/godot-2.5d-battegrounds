@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2x1nqiw1khu0"
-path="res://.godot/imported/Small-8-Direction-Characters_by_AxulArt.png-1f7f48a3e3ab45c2d63129d1b4d0dde1.ctex"
+uid="uid://b1h10vvcx1ifj"
+path="res://.godot/imported/hand.png-bbe76cfc99e45ae4a273e1f462daee12.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Small-8-Direction-Characters_by_AxulArt/Small-8-Direction-Characters_by_AxulArt.png"
-dest_files=["res://.godot/imported/Small-8-Direction-Characters_by_AxulArt.png-1f7f48a3e3ab45c2d63129d1b4d0dde1.ctex"]
+source_file="res://assets/Small-8-Direction-Characters_by_AxulArt/hand.png"
+dest_files=["res://.godot/imported/hand.png-bbe76cfc99e45ae4a273e1f462daee12.ctex"]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1

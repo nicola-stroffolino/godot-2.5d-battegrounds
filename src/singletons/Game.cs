@@ -3,6 +3,8 @@ using Godot;
 using Godot.Collections;
 
 public partial class Game : Node {
+    private static readonly Random _random = new();
+    
     public static Dictionary<Vector2, string> Directions { get; set; } = new() {
         { Vector2.Up, "u" },
         { Vector2.Down, "d" },
@@ -27,4 +29,16 @@ public partial class Game : Node {
             _ => throw new Exception(),
         };
 	}
+
+    public static Vector2 GetRandomDirection() {
+        Vector2 direction;
+        do {
+            int x = _random.Next(-1, 2);
+            int z = _random.Next(-1, 2);
+
+            direction = new(x, z);
+        } while (direction == Vector2.Zero);
+
+        return direction;
+    }
 }

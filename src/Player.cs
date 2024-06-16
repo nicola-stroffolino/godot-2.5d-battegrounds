@@ -7,6 +7,8 @@ public partial class Player : GameEntity3D {
 			X = Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left"),
 			Y = Input.GetActionStrength("move_down") - Input.GetActionStrength("move_up")
 		};
+		
+		MoveDirection = inputDirection;
     }
 
     public override bool WantsToMove() =>

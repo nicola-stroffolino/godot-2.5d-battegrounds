@@ -2,24 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2x1nqiw1khu0"
-path="res://.godot/imported/Small-8-Direction-Characters_by_AxulArt.png-1f7f48a3e3ab45c2d63129d1b4d0dde1.ctex"
+uid="uid://cfxvdxoya6dwj"
+path.s3tc="res://.godot/imported/lil_dude_Character_Body_TEX.png-055053cbddeb8b14bfd9324bad9f3a04.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://assets/Small-8-Direction-Characters_by_AxulArt/Small-8-Direction-Characters_by_AxulArt.png"
-dest_files=["res://.godot/imported/Small-8-Direction-Characters_by_AxulArt.png-1f7f48a3e3ab45c2d63129d1b4d0dde1.ctex"]
+source_file="res://assets/player/lil_dude_Character_Body_TEX.png"
+dest_files=["res://.godot/imported/lil_dude_Character_Body_TEX.png-055053cbddeb8b14bfd9324bad9f3a04.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1

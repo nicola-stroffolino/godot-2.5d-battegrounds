@@ -7,7 +7,8 @@ using System.Linq;
 public partial class State : Node {
 	public FSM StateMachine { get; set; }
 	public GameEntity3D StateOwner { get; set; }
-	public AnimatedSprite3D Sprite { get; set; }
+	public AnimationPlayer Anim { get; set; }
+	// public AnimatedSprite3D Sprite { get; set; }
 
 	public virtual void Enter() {}
 	public virtual void Exit() {}

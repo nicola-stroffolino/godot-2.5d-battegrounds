@@ -5,7 +5,7 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jlhjo"]
 margin = 0.0
 radius = 0.35
-height = 1.09
+height = 2.09
 
 [node name="HurtBox" type="Area3D"]
 collision_layer = 0

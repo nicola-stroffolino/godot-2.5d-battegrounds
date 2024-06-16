@@ -17,7 +17,8 @@ public partial class FSM : Node {
         	if (child is State s) {
 				s.StateMachine = this;
 				s.StateOwner = (GameEntity3D)GetParent();
-				s.Sprite = GetParent().GetNode<AnimatedSprite3D>("%Sprite");
+				s.Anim = GetParent().GetNode<AnimationPlayer>("AnimationPlayer");
+				// s.Sprite = GetParent().GetNode<AnimatedSprite3D>("%Sprite");
 				if (s is Attack a) a.AttackHitBox = GetParent().GetNode<HitBox>("HitBox");
 				States[s.Name.ToString().ToLower()] = s;
         	}
@@ -60,6 +61,7 @@ public partial class FSM : Node {
 	}
 
 	public void ChangeState(string newStateName) {
+		GD.Print(newStateName);
 		var newState = States[newStateName.ToLower()];
 
 		CurrentState?.Exit();
